@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8">
+        <title>BIDIFY</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="./css/styles.css">
+        <link rel="icon" href="../Resources/img/Logo.png" type="image/x-icon">
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="../services/LoginService.js"></script>
+        <script src="./js/index.js"></script>
+    </head> 
+    <body>
+        
+        <section id="Bigger">
+            <div class="container" id="main-container">
+                <div class="form-container sign-up-container">
+                    <form action="#">
+                        <h1>Registrarse</h1>
+                        <label>
+                            <input id="nombre-Bigger" type="text" placeholder="Nombre"/>
+                        </label>
+                        <label>
+                            <input id="nombreUsuarioRegistrar-Bigger" type="text" placeholder="Nombre de usuario"/>
+                        </label>
+                        <label>
+                            <input id="correo-Bigger" type="email" placeholder="Correo electronico"/>
+                        </label>
+                        <label>
+                            <input id="contraseñaRegistrar-Bigger" type="password" placeholder="Contraseña"/>
+                        </label>
+                        <button id="registrar-Bigger" style="margin-top: 9px">Registrar</button>
+                    </form>
+                </div>  
+                <div class="form-container sign-in-container">
+                    <form action="#">
+                        <h1>Iniciar sesión</h1>
+                        <label>
+                            <input type="text" id="nombreUsuarioLogin-Bigger" placeholder="Nombre de usuario"/>
+                        </label>
+                        <label>
+                            <input type="password" id="contraseñaLogin-Bigger" placeholder="Contraseña"/>
+                        </label>
+                        <button id="ingresar-Bigger">Ingresar</button>
+                    </form>
+                </div>
+                <div class="overlay-container">
+                    <div class="overlay">
+                        <div class="overlay-panel overlay-left">
+                            <h1>Log in</h1>
+                            <p>Acceda aquí si ya tiene una cuenta</p>
+                            <button class="ghost mt-5" id="signIn">Iniciar sesión</button>
+                        </div>
+                        <div class="overlay-panel overlay-right">
+                            <h1>Crea una cuenta</h1>
+                            <p>Regístrate si aún no tienes cuenta</p>
+                            <button class="ghost" id="signUp">Registrarse</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="wrapper" class="wrapper">
+            <div class="form signup">
+              <header>Registrarse</header>
+              <form action="#">
+                <input type="text" id="nombre-wrapper" placeholder="Nombre" required />
+                <input type="text" id="nombreUsuarioRegistrar-wrapper" placeholder="Nombre de usuario" required />
+                <input type="email" id="correo-wrapper" placeholder="Correo electronico" required />
+                <input type="password" id="contraseñaRegistrar-wrapper" placeholder="Contraseña" required />
+                <input id="registrar-wrapper" type="submit" value="Registrarse" />
+              </form>
+            </div>  
+            <div class="form login">
+              <header>Iniciar sesión</header>
+              <form action="#">
+                <input id="nombreUsuarioLogin-wrapper" type="text" placeholder="Nombre de usuario" required />
+                <input id="contraseñaLogin-wrapper" type="password" placeholder="contraseña" required />
+                <input id="ingresar-wrapper" type="submit" value="Iniciar sesión" />
+              </form>
+            </div>
+        </section>
+    </body>  
+    <div class="burbujas">
+        <div class="burbuja"></div>
+        <div class="burbuja"></div>
+        <div class="burbuja"></div>
+        <div class="burbuja"></div>
+        <div class="burbuja"></div>
+        <div class="burbuja"></div>
+        <div class="burbuja"></div>
+        <div class="burbuja"></div>
+        <div class="burbuja"></div>
+        <div class="burbuja"></div>
+        <div class="burbuja"></div>
+        <div class="burbuja"></div>
+    </div>
+</html>

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <title>HTML</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./css/styles.css">
+  <script src="./js/index.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.5.1/sockjs.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"  type="text/css" />
+</head> 
+<body>
+  <div class="navbar">
+      <div class="navbar_logo">
+          <img src="" alt="" />
+      </div>
+      <div class="navbar_page">
+          <span>> BIDIFY</span>
+      </div>
+      <div class="navbar_search">
+      </div>
+      <div class="navbar_icons">
+      </div>
+      <div class="navbar_user" id="profilemodal" style="cursor:pointer">
+      </div>
+  </div>
+
+  <div class="all">
+
+      <div class="rowfixed"></div>
+          <div class="left_row">
+              <div class="card" style="width: 18rem;">
+                  <img src="" class="product-image card-img-top" alt="...">
+                  <div class="card-body">
+                      <div class="dos_columnas">
+                          <span><b>Producto:</b></span>
+                          <p class="product-name card-text"></p>
+                      </div>
+                      <div class="dos_columnas">
+                          <span><b>Precio Base:</b></span>
+                          <p class="product-price card-text"></p>
+                      </div>
+                      <div class="dos_columnas">
+                          <span><b>Subastador:</b></span>
+                          <p class="product-owner card-text"></p>
+                      </div>
+                  </div>
+              </div>
+          </div>
+
+
+
+      <div class="right_row">
+          <div class="row border-radius">
+              <div class="feed">
+                      <section class="msger">
+                          <header class="msger-header">
+                            <div class="msger-header-title">
+                              <i class="fas fa-comment-alt"></i> SUBASTA
+                            </div>
+                            <div class="msger-header-options">
+                              <span><i class="fas fa-cog"></i></span>
+                            </div>
+                          </header>
+                          <main class="msger-chat">
+                          </main>
+                          <form id="messageForm" class="msger-inputarea">
+                            <input type="text" id="messageInput" class="msger-input" placeholder="Enter your message...">
+                            <button type="submit" class="btn btn-outline-success">Send</button>
+                          </form>
+                      </section>
+              </div>
+          </div>
+      </div>
+
+
+      <div class="suggestions_row">
+          <div class="row shadow">
+            <div>
+              <table class="table" id="Ganador">
+                  <thead class="thead-light">
+                      <tr>
+                          <th scope="col">Ganador</th>
+                          <th scope="col">Monto</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <td id = "ganador">{Nombre ganador}</td>
+                      <td id = "monto">{Monto}</td>
+                  </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="row shadow">
+              <div class="lista-subastas">
+                  <table class="table" id="subastasTable">
+                      <thead class="thead-light">
+                          <tr>
+                              <th scope="col" class="align-center">Participantes</th>
+                          </tr>
+                      </thead>
+                      <tbody id="participantsTableBody">
+                          <tr class="align-center">
+                              <td>Subastador de prueba</td>
+                          </tr>
+                          <tr class="align-center">
+                              <td>Subastador de prueba</td>
+                          </tr>
+                          <tr class="align-center">
+                              <td>Subastador de prueba</td>
+                          </tr>
+                          <tr class="align-center">
+                              <td>Subastador de prueba</td>
+                          </tr>
+                          <tr class="align-center">
+                              <td>Subastador de prueba</td>
+                          </tr>
+                      </tbody>
+                  </table>
+              </div>
+          </div>
+          <button id="finalizarButton" type="button" class="btn btn-danger btn-finalizar">Finalizar</button>
+
+          <button id="iniciarButton" type="button" class="btn btn-danger btn-finalizar">Iniciar</button>
+      </div>
+  </div>
+  
+
+
+
+  <!-- Modal Profile -->
+  
+</body>
+</html>
