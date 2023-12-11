@@ -4,7 +4,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const decodedToken = decodeJWT(token);
     const givenName = decodedToken.given_name;
     const isNewUser = decodedToken.newUser;
-
+    console.log(givenName);
+    console.log(isNewUser);
     if (givenName) {
       localStorage.setItem('userName', givenName);
 
@@ -48,7 +49,7 @@ document.addEventListener('DOMContentLoaded', function () {
       botonCerrarSesion.addEventListener("click", function () {
         localStorage.clear();
         sessionStorage.clear();
-        window.location.href = "../Login/index.html";
+        window.location.href = "https://bidifyB2C.b2clogin.com/bidifyB2C.onmicrosoft.com/oauth2/v2.0/authorize?p=B2C_1_LogInSignUp&client_id=dc205db1-f399-44ae-9883-fd39a6e91b91&nonce=defaultNonce&redirect_uri=https%3A%2F%2Fbidifronthttps.azurewebsites.net%2FFeed%2Findex.html&scope=openid&response_type=id_token&prompt=login";
       });
 
 });
