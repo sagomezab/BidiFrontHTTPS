@@ -1,5 +1,22 @@
 document.addEventListener('DOMContentLoaded', function () {
+  const token = getTokenFromUrl();
+  if (token) {
+    const decodedToken = decodeJWT(token);
+    const givenName = decodedToken.given_name;
+    const isNewUser = decodedToken.newUser;
 
+    if (givenName) {
+      localStorage.setItem('userName', givenName);
+
+      var nombreUsuarioSpan = document.getElementById('NombreUuario');
+      nombreUsuarioSpan.textContent = givenName;
+      if (isNewUser) {
+        registrarNuevoUsuario(givenName);
+      }
+    }
+  }else {
+    redirectToLogin();
+  }
   var crearProductoElement = document.getElementById('crearProducto');
   crearProductoElement.addEventListener('click', function () {
     document.querySelector('[data-bs-target="#Modal"]').click();
@@ -127,5 +144,47 @@ function getFormattedDate() {
   const options = { month: 'long', day: 'numeric', year: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' };
   return new Intl.DateTimeFormat('en-US', options).format(date);
 }
+function getTokenFromUrl() {
+  const url = window.location.href;
+  const tokenRegex = /#id_token=([^&]*)/;
+  const match = url.match(tokenRegex);
+  return match ? match[1] : null;
+}
+
+function redirectToLogin() {
+  const loginUrl = 'https://bidifyB2C.b2clogin.com/bidifyB2C.onmicrosoft.com/oauth2/v2.0/authorize?p=B2C_1_LogInSignUp&client_id=dc205db1-f399-44ae-9883-fd39a6e91b91&nonce=defaultNonce&redirect_uri=https%3A%2F%2Fbidifronthttps.azurewebsites.net%2FFeed%2Findex.html&scope=openid&response_type=id_token&prompt=login';
+  window.location.href = loginUrl;
+}
+function registrarNuevoUsuario(givenName) {
+  const nombre = document.getElementById('nombre-wrapper').value;
+  const correo = givenName + '@correo.com';
+  const contraseña = '123';
+  $.ajax({
+    type: 'POST',
+    url: 'https://bidibackhttps.azurewebsites.net/usuario/registrar',
+    contentType: 'application/json',
+    data: JSON.stringify({
+      userName: givenName,
+      nombre: nombre,
+      email: correo,
+      password: contraseña
+    }),
+    success: function (response) {
+      console.log('Usuario registrado exitosamente:', response);
+    },
+    error: function (error) {
+      alert(error.responseJSON.mensaje);
+    }
+  });
+}
+function decodeJWT(token) {
+  const base64Url = token.split('.')[1];
+  const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+  const jsonPayload = decodeURIComponent(window.atob(base64).split('').map(function (c) {
+      return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+  }).join(''));
+  return JSON.parse(jsonPayload);
+}
+
 cargarProductos();
 cargarSubastas();

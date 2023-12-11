@@ -23,7 +23,7 @@ function crearProducto() {
     img: img
   };
 
-  fetch('https://bidify-back.azurewebsites.net/producto/create/' + userName, {
+  fetch('https://bidibackhttps.azurewebsites.net/producto/create/' + userName, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json'
