@@ -158,7 +158,7 @@ function redirectToLogin() {
   window.location.href = loginUrl;
 }
 function registrarNuevoUsuario(givenName) {
-  const nombre = document.getElementById('nombre-wrapper').value;
+  const nombre = givenName;
   const correo = givenName + '@correo.com';
   const contraseña = '123';
   $.ajax({
