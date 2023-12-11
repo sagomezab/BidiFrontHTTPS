@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
   const token = getTokenFromUrl();
+  console.log(token);
   if (token) {
     const decodedToken = decodeJWT(token);
     const givenName = decodedToken.given_name;
