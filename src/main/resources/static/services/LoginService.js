@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', function () {
         // Realizar una solicitud HTTP para registrar el usuario
         $.ajax({
             type: 'POST',
-            url: 'https://bidibackhttps.azurewebsites.net/usuario/registrar',
+            url: 'http://localhost:8080/usuario/registrar',
             contentType: 'application/json',
             data: JSON.stringify({
                 userName: nombreUsuario,
@@ -52,16 +52,16 @@ document.addEventListener('DOMContentLoaded', function () {
         event.preventDefault(); // Prevent default form submission
 
         const nombreUsuarioLogin = document.getElementById('nombreUsuarioLogin-Bigger').value;
-        const contraseñaLogin = document.getElementById('contraseñaLogin-Bigger').value;
+        
 
         // Realizar una solicitud HTTP para iniciar sesión
         $.ajax({
             type: 'POST',
-            url: 'https://bidibackhttps.azurewebsites.net/usuario/login',
+            url: 'http://localhost:8080/usuario/login',
             contentType: 'application/json',
             data: JSON.stringify({
                 userName: nombreUsuarioLogin,
-                password: contraseñaLogin
+                
             }),
             success: function (response) {
                 localStorage.setItem('userName', nombreUsuarioLogin);
@@ -86,7 +86,7 @@ document.addEventListener('DOMContentLoaded', function () {
         // Realizar una solicitud HTTP para registrar el usuario
         $.ajax({
             type: 'POST',
-            url: 'https://bidibackhttps.azurewebsites.net/usuario/registrar',
+            url: 'http://localhost:8080/usuario/registrar',
             contentType: 'application/json',
             data: JSON.stringify({
                 userName: nombreUsuario,
@@ -114,7 +114,7 @@ document.addEventListener('DOMContentLoaded', function () {
         // Realizar una solicitud HTTP para iniciar sesión
         $.ajax({
             type: 'POST',
-            url: 'https://bidibackhttps.azurewebsites.net/usuario/login',
+            url: 'http://localhost:8080/usuario/login',
             contentType: 'application/json',
             data: JSON.stringify({
                 userName: nombreUsuarioLogin,

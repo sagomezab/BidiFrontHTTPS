@@ -23,7 +23,7 @@ function crearProducto() {
     img: img
   };
 
-  fetch('https://bidibackhttps.azurewebsites.net/producto/create/' + userName, {
+  fetch('http://localhost:8080/producto/create/' + userName, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json'

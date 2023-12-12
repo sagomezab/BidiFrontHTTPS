@@ -7,7 +7,11 @@ document.addEventListener('DOMContentLoaded', function() {
     if (enlace) {
         enlace.addEventListener('click', function(event) {
             event.preventDefault(); 
-            window.location.href = 'https://bidifyB2C.b2clogin.com/bidifyB2C.onmicrosoft.com/oauth2/v2.0/authorize?p=B2C_1_LogInSignUp&client_id=dc205db1-f399-44ae-9883-fd39a6e91b91&nonce=defaultNonce&redirect_uri=https%3A%2F%2Fbidifronthttps.azurewebsites.net%2FFeed%2Findex.html&scope=openid&response_type=id_token&prompt=login';
+            localStorage.clear();
+            sessionStorage.clear();
+            window.location.href = 'https://finalBidifyB2C.b2clogin.com/finalBidifyB2C.onmicrosoft.com/oauth2/v2.0/authorize?p=B2C_1_LoginLogout&client_id=e5f67429-a185-436f-9bce-5a75e021d347&nonce=defaultNonce&redirect_uri=http%3A%2F%2F127.0.0.1%3A5500%2Fsrc%2Fapp%2FFeed%2Findex.html&scope=openid&response_type=code&prompt=login';
+            localStorage.clear();
+            sessionStorage.clear();
         });
     } else {
         console.error('No se encontró el elemento con ID "comenzar".');

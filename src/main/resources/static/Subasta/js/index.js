@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function () {
   document.body.classList.add('loaded');
 
   const subastaId = obtenerSubastaIdDesdeUrl();
-  const socket = new SockJS('https://bidibackhttps.azurewebsites.net/stompendpoint');
+  const socket = new SockJS('http://localhost:8080/stompendpoint');
   stompClient = Stomp.over(socket);
   const userName = localStorage.getItem('userName');
   let chatHabilitado = false;
@@ -23,13 +23,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
       stompClient.subscribe('/topic/subasta/' + subastaId + '/' + userName + '/unirse', function (message) {
         const subastaCreada = JSON.parse(message.body);
-        fetch(`https://bidibackhttps.azurewebsites.net/subasta/${subastaId}`)
+        fetch(`http://localhost:8080/subasta/${subastaId}`)
         .then(response => response.json())
         .then(subasta => {
           const participantsTableBody = document.getElementById('participantsTableBody');
           participantsTableBody.innerHTML = '';
           subasta.oferentes.forEach(participant => {
-            participantsTableBody.innerHTML += `<tr class="align-center" ><td>${participant.nombre}</td></tr>`;
+            participantsTableBody.innerHTML += `<tr class="align-center" ><td>${participant.userName}</td></tr>`;
           });
         })
       .catch(error => console.error('Error al obtener la subasta:', error));
@@ -66,7 +66,7 @@ document.addEventListener('DOMContentLoaded', function () {
         actualizarEstadoChat(true);
       });
     });
-    fetch(`https://bidibackhttps.azurewebsites.net/subasta/${subastaId}`)
+    fetch(`http://localhost:8080/subasta/${subastaId}`)
       .then(response => response.json())
       .then(subasta => {
         actualizarInterfazConSubasta();
@@ -165,7 +165,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const msgerChat = document.querySelector(".msger-chat");
     msgerChat.innerHTML = '';
 
-    fetch(`https://bidibackhttps.azurewebsites.net/subasta/${subastaId}/messages`)
+    fetch(`http://localhost:8080/subasta/${subastaId}/messages`)
       .then(response => response.json())
       .then(messages => {
         messages.forEach(msg => {
@@ -207,12 +207,12 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   function actualizarInterfazConSubasta() {
-    fetch(`https://bidibackhttps.azurewebsites.net/subasta/${subastaId}`)
+    fetch(`http://localhost:8080/subasta/${subastaId}`)
       .then(response => response.json())
       .then(subasta => {
         document.querySelector('.product-name').textContent = subasta.producto.nombre;
         document.querySelector('.product-price').textContent = formatNumber(subasta.precioInicial);
-        document.querySelector('.product-owner').textContent = subasta.subastador.nombre;
+        document.querySelector('.product-owner').textContent = subasta.subastador.userName;
         var ganadorElement = document.getElementById("ganador");
         var montoElement = document.getElementById("monto");
         if (ganadorElement && montoElement) {
@@ -233,7 +233,7 @@ document.addEventListener('DOMContentLoaded', function () {
         participantsTableBody.innerHTML = '';
 
         subasta.oferentes.forEach(participant => {
-          participantsTableBody.innerHTML += `<tr class="align-center" ><td>${participant.nombre}</td></tr>`;
+          participantsTableBody.innerHTML += `<tr class="align-center" ><td>${participant.userName}</td></tr>`;
         });
       })
       .catch(error => console.error('Error al obtener la subasta actualizada:', error));

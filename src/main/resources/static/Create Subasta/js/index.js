@@ -3,7 +3,7 @@ let stompClient;
 
 document.addEventListener('DOMContentLoaded', function () {
     document.body.classList.add('loaded');
-    const socket = new SockJS('https://bidibackhttps.azurewebsites.net/stompendpoint');
+    const socket = new SockJS('http://localhost:8080/stompendpoint');
     stompClient = Stomp.over(socket);
 
     try {
@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 function cargarProductos() {
-    fetch('https://bidibackhttps.azurewebsites.net/usuario/productos/' + userName)
+    fetch('http://localhost:8080/usuario/productos/' + userName)
         .then(response => response.json())
         .then(productos => {
             console.log('Productos obtenidos:', productos);
@@ -42,7 +42,7 @@ function seleccionarProducto(id, nombre, precio, img) {
         cancelButtonText: 'Cancelar'
     }).then((result) => {
         if (result.isConfirmed) {
-            const usuarioPromise = fetch('https://bidibackhttps.azurewebsites.net/usuario/info/' + userName)
+            const usuarioPromise = fetch('http://localhost:8080/usuario/info/' + userName)
                 .then(response => response.json())
                 .catch(error => {
                     console.error('Error al obtener información del usuario:', error);
@@ -61,10 +61,10 @@ function seleccionarProducto(id, nombre, precio, img) {
                         subastador: usuario,
                         producto: productoSeleccionado,
                         precioInicial: precio,
-                        estado: true,
+                        estado: false,
                         cantidadDeOfertantes: 0,
                         oferentes: [],
-                        precioFinal: null,
+                        precioFinal: precio,
                         ganador: null,
                         messageList: [],
                     };
