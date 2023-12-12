@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', function () {
         // Realizar una solicitud HTTP para registrar el usuario
         $.ajax({
             type: 'POST',
-            url: 'http://localhost:8080/usuario/registrar',
+            url: 'https://bidibackhttps.azurewebsites.net/usuario/registrar',
             contentType: 'application/json',
             data: JSON.stringify({
                 userName: nombreUsuario,
@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', function () {
         // Realizar una solicitud HTTP para iniciar sesión
         $.ajax({
             type: 'POST',
-            url: 'http://localhost:8080/usuario/login',
+            url: 'https://bidibackhttps.azurewebsites.net/usuario/login',
             contentType: 'application/json',
             data: JSON.stringify({
                 userName: nombreUsuarioLogin,
@@ -86,7 +86,7 @@ document.addEventListener('DOMContentLoaded', function () {
         // Realizar una solicitud HTTP para registrar el usuario
         $.ajax({
             type: 'POST',
-            url: 'http://localhost:8080/usuario/registrar',
+            url: 'https://bidibackhttps.azurewebsites.net/usuario/registrar',
             contentType: 'application/json',
             data: JSON.stringify({
                 userName: nombreUsuario,
@@ -114,7 +114,7 @@ document.addEventListener('DOMContentLoaded', function () {
         // Realizar una solicitud HTTP para iniciar sesión
         $.ajax({
             type: 'POST',
-            url: 'http://localhost:8080/usuario/login',
+            url: 'https://bidibackhttps.azurewebsites.net/usuario/login',
             contentType: 'application/json',
             data: JSON.stringify({
                 userName: nombreUsuarioLogin,

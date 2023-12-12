@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function () {
   document.body.classList.add('loaded');
 
   const subastaId = obtenerSubastaIdDesdeUrl();
-  const socket = new SockJS('http://localhost:8080/stompendpoint');
+  const socket = new SockJS('https://bidibackhttps.azurewebsites.net/stompendpoint');
   stompClient = Stomp.over(socket);
   const userName = localStorage.getItem('userName');
   let chatHabilitado = false;
@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
       stompClient.subscribe('/topic/subasta/' + subastaId + '/' + userName + '/unirse', function (message) {
         const subastaCreada = JSON.parse(message.body);
-        fetch(`http://localhost:8080/subasta/${subastaId}`)
+        fetch(`https://bidibackhttps.azurewebsites.net/subasta/${subastaId}`)
         .then(response => response.json())
         .then(subasta => {
           const participantsTableBody = document.getElementById('participantsTableBody');
@@ -66,7 +66,7 @@ document.addEventListener('DOMContentLoaded', function () {
         actualizarEstadoChat(true);
       });
     });
-    fetch(`http://localhost:8080/subasta/${subastaId}`)
+    fetch(`https://bidibackhttps.azurewebsites.net/subasta/${subastaId}`)
       .then(response => response.json())
       .then(subasta => {
         actualizarInterfazConSubasta();
@@ -165,7 +165,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const msgerChat = document.querySelector(".msger-chat");
     msgerChat.innerHTML = '';
 
-    fetch(`http://localhost:8080/subasta/${subastaId}/messages`)
+    fetch(`https://bidibackhttps.azurewebsites.net/subasta/${subastaId}/messages`)
       .then(response => response.json())
       .then(messages => {
         messages.forEach(msg => {
@@ -207,7 +207,7 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   function actualizarInterfazConSubasta() {
-    fetch(`http://localhost:8080/subasta/${subastaId}`)
+    fetch(`https://bidibackhttps.azurewebsites.net/subasta/${subastaId}`)
       .then(response => response.json())
       .then(subasta => {
         document.querySelector('.product-name').textContent = subasta.producto.nombre;

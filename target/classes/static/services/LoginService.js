@@ -52,7 +52,7 @@ document.addEventListener('DOMContentLoaded', function () {
         event.preventDefault(); // Prevent default form submission
 
         const nombreUsuarioLogin = document.getElementById('nombreUsuarioLogin-Bigger').value;
-        const contraseñaLogin = document.getElementById('contraseñaLogin-Bigger').value;
+        
 
         // Realizar una solicitud HTTP para iniciar sesión
         $.ajax({
@@ -61,7 +61,7 @@ document.addEventListener('DOMContentLoaded', function () {
             contentType: 'application/json',
             data: JSON.stringify({
                 userName: nombreUsuarioLogin,
-                password: contraseñaLogin
+                
             }),
             success: function (response) {
                 localStorage.setItem('userName', nombreUsuarioLogin);

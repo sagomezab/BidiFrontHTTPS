@@ -1,23 +1,59 @@
 document.addEventListener('DOMContentLoaded', function () {
   const token = getTokenFromUrl();
-  console.log(token);
-  if (token) {
-    const decodedToken = decodeJWT(token);
-    const givenName = decodedToken.given_name;
-    const isNewUser = decodedToken.newUser;
-    console.log(givenName);
-    console.log(isNewUser);
+  const decodedToken = decodeJWT(token);
+  let givenName
+  try{
+    givenName = decodedToken.given_name;
+  }catch(error){
+    givenName = null;
+  }
+  if (givenName !== undefined && givenName !== null) {
+    
+    try {
+      fetch(`https://bidibackhttps.azurewebsites.net/usuario/info/${givenName}`)
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Usuario no encontrado');
+          }
+          
+        })
+        .then(usuario => {
+        })
+        .catch(error => {
+          console.log('Usuario registrado');
+          registrarNuevoUsuario(givenName);
+        });
+    } catch (error) {
+      
+    } 
+    
+    
     if (givenName) {
+      
       localStorage.setItem('userName', givenName);
 
       var nombreUsuarioSpan = document.getElementById('NombreUuario');
       nombreUsuarioSpan.textContent = givenName;
-      if (isNewUser) {
-        registrarNuevoUsuario(givenName);
-      }
+      
     }
+    
   }else {
-    redirectToLogin();
+    
+    const sujeto = localStorage.getItem('userName'); 
+    
+    if(sujeto == null){
+      localStorage.clear();
+      sessionStorage.clear();
+      window.location.href = '../Welcome/index.html';
+      localStorage.clear();
+      sessionStorage.clear();
+    }else{
+      
+      var nombreUsuarioSpan = document.getElementById('NombreUuario');
+      nombreUsuarioSpan.textContent = localStorage.getItem('userName');
+    }
+    
+    
   }
   var crearProductoElement = document.getElementById('crearProducto');
   crearProductoElement.addEventListener('click', function () {
@@ -50,7 +86,9 @@ document.addEventListener('DOMContentLoaded', function () {
       botonCerrarSesion.addEventListener("click", function () {
         localStorage.clear();
         sessionStorage.clear();
-        window.location.href = "https://bidifyB2C.b2clogin.com/bidifyB2C.onmicrosoft.com/oauth2/v2.0/authorize?p=B2C_1_LogInSignUp&client_id=dc205db1-f399-44ae-9883-fd39a6e91b91&nonce=defaultNonce&redirect_uri=https%3A%2F%2Fbidifronthttps.azurewebsites.net%2FFeed%2Findex.html&scope=openid&response_type=id_token&prompt=login";
+        window.location.href = "../Welcome/index.html";
+        localStorage.clear();
+        sessionStorage.clear();
       });
 
 });
@@ -77,7 +115,7 @@ function cargarSubastas() {
         const fila = `
           <tr>
             <th scope="row">${index + 1}</th>
-            <td>${subasta.subastador.nombre}</td>
+            <td>${subasta.subastador.userName}</td>
             <td>${subasta.producto.nombre}</td>
             <td><img src="${subasta.producto.img}" alt="Imagen de la subasta" class = "imagen-lista"></td>
             <td><button type="button" class="button-table" onclick="unirseASubasta(${subasta.id})">unirse</button></td>
@@ -146,6 +184,7 @@ function getFormattedDate() {
   const options = { month: 'long', day: 'numeric', year: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' };
   return new Intl.DateTimeFormat('en-US', options).format(date);
 }
+
 function getTokenFromUrl() {
   const url = window.location.href;
   const tokenRegex = /#id_token=([^&]*)/;
@@ -153,23 +192,15 @@ function getTokenFromUrl() {
   return match ? match[1] : null;
 }
 
-function redirectToLogin() {
-  const loginUrl = 'https://bidifyB2C.b2clogin.com/bidifyB2C.onmicrosoft.com/oauth2/v2.0/authorize?p=B2C_1_LogInSignUp&client_id=dc205db1-f399-44ae-9883-fd39a6e91b91&nonce=defaultNonce&redirect_uri=https%3A%2F%2Fbidifronthttps.azurewebsites.net%2FFeed%2Findex.html&scope=openid&response_type=id_token&prompt=login';
-  window.location.href = loginUrl;
-}
+
 function registrarNuevoUsuario(givenName) {
-  const nombre = givenName;
-  const correo = givenName + '@correo.com';
-  const contraseña = '123';
   $.ajax({
     type: 'POST',
-    url: 'https://bidibackhttps.azurewebsites.net/usuario/registrar',
+    url: `https://bidibackhttps.azurewebsites.net/usuario/registrar`,
     contentType: 'application/json',
     data: JSON.stringify({
       userName: givenName,
-      nombre: nombre,
-      email: correo,
-      password: contraseña
+      
     }),
     success: function (response) {
       console.log('Usuario registrado exitosamente:', response);
@@ -179,14 +210,19 @@ function registrarNuevoUsuario(givenName) {
     }
   });
 }
-function decodeJWT(token) {
-  const base64Url = token.split('.')[1];
-  const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-  const jsonPayload = decodeURIComponent(window.atob(base64).split('').map(function (c) {
-      return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-  }).join(''));
-  return JSON.parse(jsonPayload);
-}
 
+function decodeJWT(token) {
+  try{
+    const base64Url = token.split('.')[1];
+    const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+    const jsonPayload = decodeURIComponent(window.atob(base64).split('').map(function (c) {
+        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+    }).join(''));
+    return JSON.parse(jsonPayload);
+  }catch(error){
+    return null;
+  }
+  
+}
 cargarProductos();
 cargarSubastas();

@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', function () {
           const participantsTableBody = document.getElementById('participantsTableBody');
           participantsTableBody.innerHTML = '';
           subasta.oferentes.forEach(participant => {
-            participantsTableBody.innerHTML += `<tr class="align-center" ><td>${participant.nombre}</td></tr>`;
+            participantsTableBody.innerHTML += `<tr class="align-center" ><td>${participant.userName}</td></tr>`;
           });
         })
       .catch(error => console.error('Error al obtener la subasta:', error));
@@ -212,7 +212,7 @@ document.addEventListener('DOMContentLoaded', function () {
       .then(subasta => {
         document.querySelector('.product-name').textContent = subasta.producto.nombre;
         document.querySelector('.product-price').textContent = formatNumber(subasta.precioInicial);
-        document.querySelector('.product-owner').textContent = subasta.subastador.nombre;
+        document.querySelector('.product-owner').textContent = subasta.subastador.userName;
         var ganadorElement = document.getElementById("ganador");
         var montoElement = document.getElementById("monto");
         if (ganadorElement && montoElement) {
@@ -233,7 +233,7 @@ document.addEventListener('DOMContentLoaded', function () {
         participantsTableBody.innerHTML = '';
 
         subasta.oferentes.forEach(participant => {
-          participantsTableBody.innerHTML += `<tr class="align-center" ><td>${participant.nombre}</td></tr>`;
+          participantsTableBody.innerHTML += `<tr class="align-center" ><td>${participant.userName}</td></tr>`;
         });
       })
       .catch(error => console.error('Error al obtener la subasta actualizada:', error));

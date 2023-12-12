@@ -61,10 +61,10 @@ function seleccionarProducto(id, nombre, precio, img) {
                         subastador: usuario,
                         producto: productoSeleccionado,
                         precioInicial: precio,
-                        estado: true,
+                        estado: false,
                         cantidadDeOfertantes: 0,
                         oferentes: [],
-                        precioFinal: null,
+                        precioFinal: precio,
                         ganador: null,
                         messageList: [],
                     };
